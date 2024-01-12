@@ -8,9 +8,9 @@ on:
 env:
   UBUNTU_VERSION: 22.04
   BUILDX_NO_DEFAULT_ATTESTATIONS: 1
-  LATEST_CUDA: "2.1.1-py3.11-cuda-12.1.0-base-22.04"
-  LATEST_ROCM: "2.1.1-py3.11-rocm-5.6-runtime-22.04"
-  LATEST_CPU: "2.1.1-py3.11-cpu-22.04"
+  LATEST_CUDA: "2.1.2-py3.11-cuda-12.1.0-base-22.04"
+  LATEST_ROCM: "2.1.2-py3.11-rocm-5.6-runtime-22.04"
+  LATEST_CPU: "2.1.2-py3.11-cpu-22.04"
 
 jobs:
   cpu-base:
@@ -25,6 +25,7 @@ jobs:
           - "2.0.1"
           - "2.1.0"
           - "2.1.1"
+          - "2.1.2"
     steps:
       -
         name: Free Space
@@ -67,7 +68,7 @@ jobs:
         with:
           context: build
           build-args: |
-            IMAGE_BASE=ghcr.io/ai-dock/pytorch:${{ matrix.pytorch }}-py${{ matrix.python }}-cpu-${{ env.UBUNTU_VERSION }}
+            IMAGE_BASE=ghcr.io/ponzitech/pytorch:${{ matrix.pytorch }}-py${{ matrix.python }}-cpu-${{ env.UBUNTU_VERSION }}
           push: true
           # Avoids unknown/unknown architecture and extra metadata
           provenance: false
@@ -85,6 +86,7 @@ jobs:
           - "2.0.1"
           - "2.1.0"
           - "2.1.1"
+          - "2.1.2"
         cuda:
           - "11.7.1"
           - "11.8.0"
@@ -148,7 +150,7 @@ jobs:
         with:
           context: build
           build-args: |
-            IMAGE_BASE=ghcr.io/ai-dock/pytorch:${{ matrix.pytorch }}-py${{ matrix.python }}-cuda-${{ matrix.cuda }}-${{ matrix.level }}-${{ env.UBUNTU_VERSION }}
+            IMAGE_BASE=ghcr.io/ponzitech/pytorch:${{ matrix.pytorch }}-py${{ matrix.python }}-cuda-${{ matrix.cuda }}-${{ matrix.level }}-${{ env.UBUNTU_VERSION }}
           push: true
           provenance: false
           tags: ${{ env.TAGS }}
@@ -165,6 +167,7 @@ jobs:
           - "2.0.1"
           - "2.1.0"
           - "2.1.1"
+          - "2.1.2"
         rocm:
           - "5.4.2"
           - "5.6"
@@ -177,6 +180,8 @@ jobs:
           - pytorch: "2.1.0"
             rocm: "5.4.2"
           - pytorch: "2.1.1"
+            rocm: "5.4.2"
+          - pytorch: "2.1.2"
             rocm: "5.4.2"
     steps:
       -
@@ -220,7 +225,7 @@ jobs:
         with:
           context: build
           build-args: |
-            IMAGE_BASE=ghcr.io/ai-dock/pytorch:${{ matrix.pytorch }}-py${{ matrix.python }}-rocm-${{ matrix.rocm }}-${{ matrix.level }}-${{ env.UBUNTU_VERSION }}
+            IMAGE_BASE=ghcr.io/ponzitech/pytorch:${{ matrix.pytorch }}-py${{ matrix.python }}-rocm-${{ matrix.rocm }}-${{ matrix.level }}-${{ env.UBUNTU_VERSION }}
           push: true
           provenance: false
           tags: ${{ env.TAGS }}

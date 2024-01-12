@@ -1,6 +1,6 @@
 # For build automation - Allows building from any ai-dock base image
 # Use a *cuda*base* image as default because pytorch brings the libs
-ARG IMAGE_BASE="ghcr.io/ai-dock/pytorch:2.0.1-py3.10-cuda-11.8.0-base-22.04"
+ARG IMAGE_BASE="ghcr.io/ponzienjoyer/pytorch:2.0.1-py3.10-cuda-11.8.0-base-22.04"
 FROM ${IMAGE_BASE}
 
 LABEL org.opencontainers.image.source https://github.com/ai-dock/pytorch
